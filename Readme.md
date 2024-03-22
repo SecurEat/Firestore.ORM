@@ -2,13 +2,15 @@
 
 Firestore.ORM is a lightweight object-relational mapping (ORM) product for [Firestore](https://firebase.google.com/) : It provides an additional layer of abstraction on top of the existing Firestore SDK. (Google.Cloud.Firestore).
 
-It allows you to structure the data contained in Firebase and to ensure its itegrity. It also provides utility methods encapsulating the SDK functions in order to simplify writing and reading, serialization and synchronization.
+One of the main advantages of this project is to provide a solid model structure base in order to ensure the integrity of the data present in Firestore. It also provides utility methods encapsulating the SDK functions in order to simplify writing and reading, serialization and synchronization.
 
 [![NuGet latest version](https://badgen.net/nuget/v/Firestore.ORM/latest)](https://www.nuget.org/packages/Firestore.ORM/)
 
 - https://www.nuget.org/packages/Firestore.ORM/
 
 ## Model
+
+- All class from the model must derive from the type `Firestore.ORM.FirestoreDocument`. This abstract class is wrapping data provided by the SDK (such as `Google.Cloud.Firestore.DocumentReference`) and additional data provided by the ORM, such as a list of corruption errors if the data obtained from Firebase does not match the structure expected by the model.
 
 ```csharp
 
