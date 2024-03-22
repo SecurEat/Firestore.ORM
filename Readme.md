@@ -159,7 +159,7 @@ static void OnIncident(Incident incident)
 
 ```
 
-## Package Dependencies
+## Contributors
 
 | Name                                                 |
 | ---------------------------------------------------- |
