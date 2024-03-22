@@ -10,7 +10,7 @@ One of the main advantages of this library is to provide a solid model structure
 
 ## Model
 
-- All class from the model must derive from the type `Firestore.ORM.FirestoreDocument`. This abstract class is wrapping data provided by the SDK (such as `Google.Cloud.Firestore.DocumentReference`) and additional data provided by the ORM, such as a list of corruption errors if the data obtained from Firebase does not match the structure expected by the model.
+- All class from the model must derive from the type `Firestore.ORM.FirestoreDocument`. This abstract class is wrapping data provided by the SDK (such as `Google.Cloud.Firestore.DocumentReference`) and additional data provided by the ORM, such as a list of corruption errors if the data obtained from Firebase does not match the structure expected.
 
 ```csharp
 
