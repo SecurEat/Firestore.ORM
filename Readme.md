@@ -78,7 +78,7 @@ FirestoreManager.Instance.Initialize("my-project", client, Assembly.GetExecuting
 ### Basic fetch
 
 ```csharp
-  IEnumerable<User> userCollection = await FirestoreManager.Instance.Collection("users").GetAsync<User>();
+IEnumerable<User> userCollection = await FirestoreManager.Instance.Collection("users").GetAsync<User>();
 ```
 
 ### Listeners
