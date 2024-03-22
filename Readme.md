@@ -165,7 +165,3 @@ static void OnIncident(Incident incident)
 | Name                                                 |
 | ---------------------------------------------------- |
 | Marius Lumbroso _Author_ (https://github.com/Skinz3) |
-
-```
-
-```
