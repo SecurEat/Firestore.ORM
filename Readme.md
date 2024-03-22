@@ -8,8 +8,6 @@ It allows you to structure the data contained in Firebase and to ensure its iteg
 
 - https://www.nuget.org/packages/Firestore.ORM/
 
-# Exemple
-
 ## Model
 
 ```csharp
