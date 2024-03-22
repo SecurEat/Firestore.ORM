@@ -70,7 +70,7 @@ Initialize(string projectId, FirestoreClient client, Assembly assembly,
             MappingBehavior mappingBehavior = MappingBehavior.Strict)
 ```
 
-The 'assembly' parameter indicates the assembly where the model is located. 'mappingBehavior' corresponds to the level of tolerance that the ORM adopts when remote data structure is not valid compared to the model. In the case of strict tolerance, the ORM throws if any data is corrupted.
+The _assembly_ parameter indicates the assembly where the model is located. _mappingBehavior_ corresponds to the level of tolerance that the ORM adopts when remote data structure is not valid compared to the model. In the case of strict tolerance, the ORM throws if any data is corrupted.
 
 ```csharp
 
@@ -140,7 +140,7 @@ newUser.Insert();
 ## Data sanitize, incident report
 
 Incident management allows you to verify that the data present in Firebase respects the structure expected by the model. It ensures the structuring of data.
-This feature is only available with mappingBehavior : 'MappingBehavior.Souple'.
+This feature is only available with _mappingBehavior_ : 'MappingBehavior.Souple'.
 
 ```csharp
 
