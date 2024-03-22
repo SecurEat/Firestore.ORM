@@ -59,13 +59,38 @@ It allows you to structure the data contained in Firebase and to ensure its iteg
 }
 ```
 
-## Reading database
+## Connecting to firebase
 
 ```csharp
 
-  Database database = new Database(new MySqlProvider("myDb","localhost","root",""));
-  // or
-  Database database =  new Database(new SQLiteProvider("file.sqlite"));
+var client = new FirestoreClientBuilder
+{
+    CredentialsPath = "credentials.json"
+}.Build();
+
+FirestoreManager.Instance.Initialize("my-project", client, Assembly.GetExecutingAssembly());
+
+
+```
+
+## Fetching data
+
+```csharp
+
+// Basic fetch
+
+IEnumerable<User> userCollection = await FirestoreManager.Instance.Collection("users").GetAsync<User>();
+
+
+// Fetch using listeners
+
+SnapshotListener<User> userListener = new SnapshotListener<User>(FirestoreManager.Instance.Collection("users"));
+userListener.OnItemChange += ...
+userListener.OnItemsUpdated += ...
+await userListener.FetchAndListen();
+
+IEnumerable<User> realtimeUsers = userListener.GetItems();
+
 
 ```
 
