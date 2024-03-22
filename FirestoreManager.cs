@@ -37,6 +37,13 @@ namespace Firestore.ORM
             get;
             private set;
         }
+        /// <summary>
+        /// Initialize the program
+        /// </summary>
+        /// <param name="projectId">Firebase project id https://firebase.google.com/docs/projects/learn-more?hl=fr</param>
+        /// <param name="client">Firebase SDK client</param>
+        /// <param name="assembly">The model assembly</param>
+        /// <param name="mappingBehavior">The mapping tolerance while fetching objects</param>
         public void Initialize(string projectId, FirestoreClient client, Assembly assembly,
             MappingBehavior mappingBehavior = MappingBehavior.Strict)
         {
@@ -108,7 +115,6 @@ namespace Firestore.ORM
             {
                 return null;
             }
-
 
             if (targetType == typeof(string))
             {
@@ -207,7 +213,9 @@ namespace Firestore.ORM
 
             return obj;
         }
-
+        /// <summary>
+        /// Faster, using compiled lambda expression.
+        /// </summary>
         public Dictionary<string, object> ToFirestoreCompiled<T>(T item)
         {
             var type = item.GetType();

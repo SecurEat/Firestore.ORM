@@ -18,11 +18,15 @@ namespace Firestore.ORM
 
         public event OnItemsUpdatedDelegate? OnItemsUpdated;
 
-        private Query Query
+        public Query Query
         {
             get;
-            set;
+            private set;
         }
+        /// <summary>
+        /// Returns a snapshot of the listener's internal collection in real time.
+        /// This only returns the items matching the expected structure defined in the model.
+        /// </summary>
         public T[] Items
         {
             get
@@ -35,12 +39,17 @@ namespace Firestore.ORM
 
         private List<T> m_items;
 
+        /// <summary>
+        /// Should the events be triggered or cached and then invoked when calling DispatchEvent()
+        /// </summary>
         private bool TriggerEvents
         {
             get;
             set;
         }
-
+        /// <summary>
+        /// Collection of the cached events
+        /// </summary>
         private List<Action> Events
         {
             get;
@@ -55,6 +64,9 @@ namespace Firestore.ORM
             this.OnItemsUpdated = null;
             Events = new List<Action>();
         }
+        /// <summary>
+        /// Dispatch the delayed events and invoke it on the calling thread.
+        /// </summary>
         public void DispatchEvents()
         {
             foreach (var evt in Events)
@@ -66,7 +78,10 @@ namespace Firestore.ORM
 
             TriggerEvents = true;
         }
-
+        /// <summary>
+        /// Fetch the collection and then start to listen for any changes.
+        /// </summary>
+        /// <param name="triggerEvents">Should the events be cached</param>
         public async Task FetchAndListenAsync(bool triggerEvents = true)
         {
             TriggerEvents = triggerEvents;
@@ -104,8 +119,6 @@ namespace Firestore.ORM
                             oldItem = oldItems[change.OldIndex.Value];
                         }
 
-
-
                         if (newItem == null || newItem.Incidents.Count == 0)
                         {
                             if (TriggerEvents)
@@ -121,6 +134,7 @@ namespace Firestore.ORM
                 }
 
                 m_items_safe = m_items.Where(x => x.Incidents.Count == 0).ToList();
+
                 if (!tcs.Task.IsCompleted)
                 {
                     tcs.SetResult(true);
@@ -139,15 +153,23 @@ namespace Firestore.ORM
             await tcs.Task;
         }
 
-
+        /// <summary>
+        /// Returns a document by reference
+        /// </summary>
         public T? GetById(string id)
         {
             return Items.FirstOrDefault(x => x.Id == id);
         }
+        /// <summary>
+        /// Returns items that do not match the model structure.
         public T[] GetItemsWithIncidentsOnly()
         {
             return m_items.Where(x => x.Incidents.Count > 0).ToArray();
         }
+        /// <summary>
+        /// Returns all objects, including those with corrupted data
+        /// </summary>
+        /// <returns></returns>
         public T[] GetAllItems()
         {
             return m_items.ToArray();
