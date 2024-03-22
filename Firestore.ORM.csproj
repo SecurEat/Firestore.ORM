@@ -16,13 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\5f34fd1aa2ebfaf2cd548bafeb021c8f.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Google.Cloud.Firestore" Version="3.5.1" />
   </ItemGroup>
 

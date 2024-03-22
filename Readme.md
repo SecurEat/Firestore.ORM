@@ -68,6 +68,7 @@ The 'assembly' parameter indicates the assembly where the model is located. 'map
 Initialize(string projectId, FirestoreClient client, Assembly assembly,
             MappingBehavior mappingBehavior = MappingBehavior.Strict) ```
 
+````
 
 ```csharp
 
@@ -79,7 +80,7 @@ var client = new FirestoreClientBuilder
 FirestoreManager.Instance.Initialize("my-project", client, Assembly.GetExecutingAssembly());
 
 
-````
+```
 
 ## Manipulating data
 
