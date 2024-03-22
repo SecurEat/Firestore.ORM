@@ -63,11 +63,10 @@ It allows you to structure the data contained in Firebase and to ensure its iteg
 
 The initialization function establishes the connection with Firebase and introspects the code to discover the model.
 
-````csharp
+```csharp
 Initialize(string projectId, FirestoreClient client, Assembly assembly,
-            MappingBehavior mappingBehavior = MappingBehavior.Strict) ```
-
-````
+            MappingBehavior mappingBehavior = MappingBehavior.Strict)
+```
 
 The 'assembly' parameter indicates the assembly where the model is located. 'mappingBehavior' corresponds to the level of tolerance that the ORM adopts when remote data structure is not valid compared to the model. In the case of strict tolerance, the ORM throws if any data is corrupted.
 
@@ -166,3 +165,7 @@ static void OnIncident(Incident incident)
 | Name                                                 |
 | ---------------------------------------------------- |
 | Marius Lumbroso _Author_ (https://github.com/Skinz3) |
+
+```
+
+```
