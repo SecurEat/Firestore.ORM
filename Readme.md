@@ -117,8 +117,10 @@ newUser.Insert();
 
 ## Data sanitize, incident report
 
+Incident management allows you to verify that the data present in Firebase respects the structure expected by the model. It ensures the structuring of data
+
 ```csharp
-...
+
 IncidentManager.OnIncident += OnIncident;
 
 static void OnIncident(Incident incident)
@@ -126,7 +128,7 @@ static void OnIncident(Incident incident)
       switch (incident)
       {
           case MissingFieldIncident missingFieldIncident:
-              // Solve missing field on document incident
+              // Solve missing field on document
               break;
           case InvalidFieldTypeIncident invalidFieldTypeIncident:
                // Solve wrong field type on document
