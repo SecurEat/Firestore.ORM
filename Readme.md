@@ -61,6 +61,14 @@ It allows you to structure the data contained in Firebase and to ensure its iteg
 
 ## Connecting to Firebase
 
+The initialization function establishes the connection with Firebase and introspects the code to discover the model.
+The 'assembly' parameter indicates the assembly where the model is located. 'mappingBehavior' corresponds to the level of tolerance that the ORM adopts when remote data structure is not valid compared to the model. In the case of strict tolerance, the ORM throws if any data is corrupted.
+
+````csharp
+Initialize(string projectId, FirestoreClient client, Assembly assembly,
+            MappingBehavior mappingBehavior = MappingBehavior.Strict) ```
+
+
 ```csharp
 
 var client = new FirestoreClientBuilder
@@ -71,7 +79,7 @@ var client = new FirestoreClientBuilder
 FirestoreManager.Instance.Initialize("my-project", client, Assembly.GetExecutingAssembly());
 
 
-```
+````
 
 ## Manipulating data
 
@@ -89,6 +97,10 @@ CollectionReference collection = FirestoreManager.Instance.Collection("users");
 SnapshotListener<User> userListener = new SnapshotListener<User>();
 userListener.OnItemChange += ...
 userListener.OnItemsUpdated += ...
+
+/*
+  First fetch the collection and start to listen to the changes
+*/
 await userListener.FetchAndListen();
 
 /*
@@ -111,7 +123,7 @@ user.Update();
 
 if (user.Phone.Contains("+33"))
 {
-user.Delete();
+    user.Delete();
 }
 
 User newUser = new User(collection.Document());
@@ -124,7 +136,8 @@ newUser.Insert();
 
 ## Data sanitize, incident report
 
-Incident management allows you to verify that the data present in Firebase respects the structure expected by the model. It ensures the structuring of data
+Incident management allows you to verify that the data present in Firebase respects the structure expected by the model. It ensures the structuring of data.
+This feature is only available with mappingBehavior : 'MappingBehavior.Souple'.
 
 ```csharp
 
