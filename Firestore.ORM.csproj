@@ -10,10 +10,17 @@
     <Authors>Marius Lumbroso</Authors>
     <Description>Lightweight object-relational mapping product for Firestore, provides an additional layer of abstraction on top of the existing SDK. </Description>
     <PackageProjectUrl></PackageProjectUrl>
-    <PackageIcon>5f34fd1aa2ebfaf2cd548bafeb021c8f.png</PackageIcon>
-    <Version>1.0.2</Version>
+    <PackageIcon>icon.png</PackageIcon>
+    <Version>1.0.3</Version>
     <RepositoryUrl>https://github.com/SecurEat/Firestore.ORM</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Firestore" Version="3.5.1" />

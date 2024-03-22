@@ -70,12 +70,15 @@ namespace Firestore.ORM.Logging
         }
         private static void WriteColored(object value, ConsoleColor color, bool timestamp = true)
         {
+            var oldColor = Console.ForegroundColor;
 
             Console.ForegroundColor = color;
             if (timestamp)
                 Console.WriteLine(DateTime.Now.ToString("dd/MM HH'h'mm") + " - " + value);
             else
                 Console.WriteLine(value);
+
+            Console.ForegroundColor = oldColor;
         }
         public static void NewLine()
         {
@@ -85,7 +88,7 @@ namespace Firestore.ORM.Logging
             }
         }
 
-      
+
 
     }
 }
