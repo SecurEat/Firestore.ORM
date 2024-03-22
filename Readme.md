@@ -4,7 +4,7 @@ Firestore.ORM is a lightweight object-relational mapping (ORM) product for [Fire
 
 It allows you to structure the data contained in Firebase and to ensure its itegrity.
 
-[![NuGet latest version](https://badgen.net/nuget/v/Flex/latest)](https://www.nuget.org/packages/Flex/)
+[![NuGet latest version](https://badgen.net/nuget/v/Firestore.ORM/latest)](https://www.nuget.org/packages/Firestore.ORM/)
 
 # Exemple
 
@@ -59,7 +59,7 @@ It allows you to structure the data contained in Firebase and to ensure its iteg
 }
 ```
 
-## Connecting to firebase
+## Connecting to Firebase
 
 ```csharp
 
