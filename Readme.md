@@ -1,6 +1,6 @@
 ﻿# Firestore.ORM
 
-Firestore.ORM is a lightweight object-relational mapping (ORM) product for [Firestore](https://firebase.google.com/) : It provides an additional layer of abstraction on top of the existing Firestore SDK. (Google.Cloud.Firestore).
+Firestore.ORM is a lightweight object-relational mapping (ORM) product for [Firebase.Firestore](https://firebase.google.com/) : It provides an additional layer of abstraction on top of the existing Firestore SDK. (Google.Cloud.Firestore).
 
 One of the main advantages of this project is to provide a solid model structure base in order to ensure the integrity of the data present in Firestore. It also provides utility methods encapsulating the SDK functions in order to simplify writing and reading, serialization and synchronization.
 
