@@ -15,7 +15,7 @@ namespace Firestore.ORM
 {
     public class FirestoreManager : Singleton<FirestoreManager>
     {
-        private Dictionary<Type, CollectionDefinition> Definitions
+        private Dictionary<Type, CollectionDefinition> CollectionDefinitions
         {
             get;
             set;
@@ -57,7 +57,7 @@ namespace Firestore.ORM
 
         private void BuildDefinitions()
         {
-            Definitions = new Dictionary<Type, CollectionDefinition>();
+            CollectionDefinitions = new Dictionary<Type, CollectionDefinition>();
 
             foreach (var type in TargetAssembly.GetTypes())
             {
@@ -77,7 +77,7 @@ namespace Firestore.ORM
                         }
                     }
 
-                    Definitions.Add(type, new CollectionDefinition(type, dict));
+                    CollectionDefinitions.Add(type, new CollectionDefinition(type, dict));
 
                 }
             }
@@ -89,7 +89,7 @@ namespace Firestore.ORM
         }
         public CollectionDefinition CollectionDefinition(Type type)
         {
-            return Definitions[type];
+            return CollectionDefinitions[type];
         }
 
         public async Task<List<T>> Get<T>(Query query) where T : FirestoreDocument
@@ -109,7 +109,7 @@ namespace Firestore.ORM
             var snapshot = await reference.GetSnapshotAsync();
             return FromFirestore<T>(reference, snapshot.ToDictionary());
         }
-        private IList ConvertList(List<object> value, Type targetType)
+        private IList? ConvertList(List<object> value, Type targetType)
         {
             if (value == null)
             {
@@ -136,8 +136,8 @@ namespace Firestore.ORM
         {
             Type type = typeof(T);
 
-            var definition = Definitions[type];
-            var obj = (T)Activator.CreateInstance(type, new object[] { reference })!;
+            var definition = CollectionDefinitions[type];
+            var obj = (T)Activator.CreateInstance(type, [reference])!;
 
             if (obj is DefaultFirestoreDocument defaultFirestoreDocument)
             {
@@ -160,7 +160,7 @@ namespace Firestore.ORM
 
                 if (!values.ContainsKey(key.Name) || values[key.Name] == null)
                 {
-                    if (key.Nullability == FieldNullability.NonNullable) //&& propertyInfo.GetValue(obj) == null)
+                    if (key.Nullability == FieldNullability.NonNullable)
                     {
                         obj.Incidents.Add(new MissingFieldIncident(obj, propertyInfo, key));
                     }
@@ -199,7 +199,7 @@ namespace Firestore.ORM
 
                     propertyInfo.SetValue(obj, value);
                 }
-                catch (Exception ex)
+                catch
                 {
                     obj.Incidents.Add(new InvalidFieldTypeIncident(obj, propertyInfo, value));
 
@@ -219,8 +219,7 @@ namespace Firestore.ORM
         public Dictionary<string, object> ToFirestoreCompiled<T>(T item)
         {
             var type = item.GetType();
-
-            var definition = Definitions[type];
+            var definition = CollectionDefinitions[type];
             var func = definition.Converter;
             Dictionary<string, object> result = func(item);
             return result;
@@ -231,12 +230,13 @@ namespace Firestore.ORM
 
             var type = item.GetType();
 
-            var definition = Definitions[type];
+            var definition = CollectionDefinitions[type];
 
             foreach (var pair in definition.Properties)
             {
                 result.Add(pair.Key.Name, pair.Value.GetValue(item));
             }
+
             return result;
         }
         public FirestoreDb GetFirestoreDb()

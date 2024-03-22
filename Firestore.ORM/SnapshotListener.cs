@@ -88,7 +88,6 @@ namespace Firestore.ORM
 
             var tcs = new TaskCompletionSource<bool>();
 
-
             var listener = Query.Listen((QuerySnapshot snap) =>
             {
                 var oldItems = m_items.ToArray();

@@ -10,7 +10,6 @@ namespace Firestore.ORM.Extensions
 {
     static class TypeExtensions
     {
-
         public static bool IsListType(this Type type)
         {
             return type.IsGenericType &&
