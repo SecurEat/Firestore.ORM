@@ -71,6 +71,6 @@ It allows you to structure the data contained in Firebase and to ensure its iteg
 
 # Package Dependencies
 
-| Name                                                                                                                   |
-| ---------------------------------------------------------------------------------------------------------------------- |
-| Marius Lumbroso (Author) [<img src="https://avatars.githubusercontent.com/u/13202544?v=4">](https://github.com/Skinz3) |
+| Name                                                 |
+| ---------------------------------------------------- |
+| Marius Lumbroso (Author) (https://github.com/Skinz3) |
