@@ -4,7 +4,9 @@ Firestore.ORM is a lightweight object-relational mapping (ORM) product for [Fire
 
 It allows you to structure the data contained in Firebase and to ensure its itegrity. It also provides utility methods encapsulating the SDK functions in order to simplify writing and reading, serialization and synchronization.
 
-[![NuGet latest version](https://badgen.net/nuget/v/Firestore.ORM/latest)](https://www.nuget.org/packages/Firestore.ORM/) https://www.nuget.org/packages/Firestore.ORM/
+[![NuGet latest version](https://badgen.net/nuget/v/Firestore.ORM/latest)](https://www.nuget.org/packages/Firestore.ORM/)
+
+- https://www.nuget.org/packages/Firestore.ORM/
 
 # Exemple
 
