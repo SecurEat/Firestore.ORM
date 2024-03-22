@@ -34,7 +34,7 @@ It allows you to structure the data contained in Firebase and to ensure its iteg
     }
 
     [Field("phone", FieldNullability.Nullable)]
-    public string Name
+    public string Phone
     {
         get;
         set;
@@ -73,7 +73,7 @@ FirestoreManager.Instance.Initialize("my-project", client, Assembly.GetExecuting
 
 ```
 
-## Fetching data
+## Manipulating data
 
 ```csharp
 
@@ -84,18 +84,61 @@ IEnumerable<User> userCollection = await FirestoreManager.Instance.Collection("u
 
 // Fetch using listeners
 
-SnapshotListener<User> userListener = new SnapshotListener<User>(FirestoreManager.Instance.Collection("users"));
+CollectionReference collection = FirestoreManager.Instance.Collection("users");
+
+SnapshotListener<User> userListener = new SnapshotListener<User>();
 userListener.OnItemChange += ...
 userListener.OnItemsUpdated += ...
 await userListener.FetchAndListen();
 
-IEnumerable<User> realtimeUsers = userListener.GetItems();
+List<User> realtimeUsers = userListener.GetItems().ToList();
+
+// Write operations (extension methods)
+
+User? user = realtimeUsers.Find(x=> x.Firstname == "John");
+
+user.Firstname = "Peter";
+
+user.Update();
+
+if (user.Phone.Contains("+33"))
+{
+    user.Delete();
+}
+
+User newUser = new User(collection.Document());
+
+newUser.Name = "Maria";
+
+newUser.Insert();
 
 
 ```
 
-# Package Dependencies
+## Data sanitize, incident report
+
+```csharp
+...
+IncidentManager.OnIncident += OnIncident;
+
+static void OnIncident(Incident incident)
+{
+      switch (incident)
+      {
+          case MissingFieldIncident missingFieldIncident:
+              // Solve missing field on document incident
+              break;
+          case InvalidFieldTypeIncident invalidFieldTypeIncident:
+               // Solve wrong field type on document
+              break;
+      }
+}
+
+
+```
+
+## Package Dependencies
 
 | Name                                                 |
 | ---------------------------------------------------- |
-| Marius Lumbroso (Author) (https://github.com/Skinz3) |
+| Marius Lumbroso _Author_ (https://github.com/Skinz3) |
