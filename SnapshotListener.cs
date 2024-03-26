@@ -1,4 +1,6 @@
-﻿using Google.Api;
+﻿using Firestore.ORM.Extensions;
+using Firestore.ORM.Reflect;
+using Google.Api;
 using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
@@ -82,7 +84,7 @@ namespace Firestore.ORM
         /// Fetch the collection and then start to listen for any changes.
         /// </summary>
         /// <param name="triggerEvents">Should the events be cached</param>
-        public async Task FetchAndListenAsync(bool triggerEvents = true)
+        public async Task FetchAndListenAsync(bool triggerEvents = true, ListenerSafetyStrategy strategy = ListenerSafetyStrategy.EnsureIntegrity)
         {
             TriggerEvents = triggerEvents;
 
@@ -98,7 +100,6 @@ namespace Firestore.ORM
                 {
                     var dictionary = snapshot.ToDictionary();
                     T? element = FirestoreManager.Instance.FromFirestore<T>(snapshot.Reference, dictionary);
-
                     m_items.Add(element);
                 }
 
@@ -149,6 +150,13 @@ namespace Firestore.ORM
                     Events.Add(() => { OnItemsUpdated?.Invoke(Items); });
                 }
             });
+
+
+            if (strategy == ListenerSafetyStrategy.EnsureIntegrity && !await Query.Exists())
+            {
+                tcs.SetResult(true);
+                return;
+            }
 
             await tcs.Task;
         }

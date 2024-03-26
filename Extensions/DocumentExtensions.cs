@@ -12,6 +12,11 @@ namespace Firestore.ORM.Extensions
 {
     public static class DocumentExtensions
     {
+        public static async Task<bool> Exists(this Query query) 
+        {
+            var res = await query.Limit(1).GetSnapshotAsync();
+            return res.Count > 0;
+        }
         public static async Task Insert<T>(this T item) where T : FirestoreDocument
         {
             await item.Reference.CreateAsync(FirestoreManager.Instance.ToFirestore(item));
