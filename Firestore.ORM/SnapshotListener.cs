@@ -86,7 +86,7 @@ namespace Firestore.ORM
         /// Fetch the collection and then start to listen for any changes.
         /// </summary>
         /// <param name="triggerEvents">Should the events be cached</param>
-        public async Task FetchAndListenAsync(bool triggerEvents = true, ListenerSafetyStrategy strategy = ListenerSafetyStrategy.EnsureIntegrity)
+        public async Task FetchAndListenAsync(bool triggerEvents = true)
         {
             TriggerEvents = triggerEvents;
 
