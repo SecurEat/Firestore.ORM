@@ -153,7 +153,8 @@ namespace Firestore.ORM
 
             if (strategy == ListenerSafetyStrategy.EnsureIntegrity && !await Query.Exists())
             {
-                tcs.SetResult(true);
+                if (!tcs.Task.IsCompleted)
+                    tcs.SetResult(true);
                 return;
             }
 
