@@ -11,7 +11,7 @@
     <Description>Lightweight object-relational mapping product for Firestore, provides an additional layer of abstraction on top of the existing SDK. </Description>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <RepositoryUrl>https://github.com/SecurEat/Firestore.ORM</RepositoryUrl>
   </PropertyGroup>
 

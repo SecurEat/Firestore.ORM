@@ -47,6 +47,8 @@ namespace Firestore.ORM
         public void Initialize(string projectId, FirestoreClient client, Assembly assembly,
             MappingBehavior mappingBehavior = MappingBehavior.Strict)
         {
+
+            client.Settings.ListenStreamingSettings = new Google.Api.Gax.Grpc.BidirectionalStreamingSettings(200);
             FirestoreDb = FirestoreDb.Create(projectId, client);
             TargetAssembly = assembly;
             MappingBehavior = mappingBehavior;

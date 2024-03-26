@@ -1,4 +1,5 @@
 ﻿using Firestore.ORM.Extensions;
+using Firestore.ORM.Logging;
 using Firestore.ORM.Reflect;
 using Google.Api;
 using Google.Cloud.Firestore;
@@ -59,6 +60,7 @@ namespace Firestore.ORM
         }
         public SnapshotListener(Query query)
         {
+            Logger.Plus();
             this.Query = query;
             this.m_items = new List<T>();
             this.m_items_safe = new List<T>();
@@ -92,6 +94,7 @@ namespace Firestore.ORM
 
             var listener = Query.Listen((QuerySnapshot snap) =>
             {
+
                 var oldItems = m_items.ToArray();
                 m_items.Clear();
 
@@ -135,11 +138,6 @@ namespace Firestore.ORM
 
                 m_items_safe = m_items.Where(x => x.Incidents.Count == 0).ToList();
 
-                if (!tcs.Task.IsCompleted)
-                {
-                    tcs.SetResult(true);
-                }
-
                 if (TriggerEvents)
                 {
                     OnItemsUpdated?.Invoke(Items);
@@ -148,15 +146,14 @@ namespace Firestore.ORM
                 {
                     Events.Add(() => { OnItemsUpdated?.Invoke(Items); });
                 }
-            });
 
-
-            if (strategy == ListenerSafetyStrategy.EnsureIntegrity && !await Query.Exists())
-            {
                 if (!tcs.Task.IsCompleted)
+                {
                     tcs.SetResult(true);
-                return;
-            }
+                }
+
+
+            });
 
             await tcs.Task;
         }
