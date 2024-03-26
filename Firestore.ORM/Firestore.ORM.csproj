@@ -16,14 +16,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+    <PackageReference Include="Google.Cloud.Firestore" Version="3.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Cloud.Firestore" Version="3.5.1" />
+    <None Update="icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

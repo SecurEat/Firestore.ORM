@@ -73,6 +73,7 @@ namespace Firestore.ORM.Logging
             var oldColor = Console.ForegroundColor;
 
             Console.ForegroundColor = color;
+
             if (timestamp)
                 Console.WriteLine(DateTime.Now.ToString("dd/MM HH'h'mm") + " - " + value);
             else

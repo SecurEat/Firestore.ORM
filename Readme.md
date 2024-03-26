@@ -1,8 +1,8 @@
-﻿# Firestore.ORM
+﻿# Firestore.ORM 🔥
 
-Firestore.ORM is a lightweight object-relational mapping (ORM) product for [Firebase.Firestore](https://firebase.google.com/) : It provides an additional layer of abstraction on top of the existing Firestore SDK [Google.Cloud.Firestore](https://github.com/googleapis/google-cloud-dotnet/tree/main)
+Firestore.ORM is a lightweight object-relational mapping (ORM) product for [Firebase.Firestore](https://firebase.google.com/) : It provides an additional layer of abstraction on top of the existing [Firestore SDK](https://github.com/googleapis/google-cloud-dotnet/tree/main)
 
-One of the main advantages of this library is to provide a solid model structure base in order to ensure the integrity of the data present in Firestore. It also provides utility methods encapsulating the SDK functions in order to simplify writing and reading, serialization and synchronization.
+One of the main advantages of this library is to provide a solid model structure base in order to ensure the integrity of the data present in Firestore. It also provides utility methods encapsulating the SDK functions in order to simplify writing and reading, serialization and synchronization. It sits on top of the official Firebase SDK, it's not intended to replace it. The ORM exposes the parts of the SDK it uses in a way that it remains usable within the project.
 
 [![NuGet latest version](https://badgen.net/nuget/v/Firestore.ORM/latest)](https://www.nuget.org/packages/Firestore.ORM/)
 
