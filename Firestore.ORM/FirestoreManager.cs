@@ -137,7 +137,7 @@ namespace Firestore.ORM
             Type type = typeof(T);
 
             var definition = CollectionDefinitions[type];
-            var obj = (T)Activator.CreateInstance(type, [reference])!;
+            var obj = (T)Activator.CreateInstance(type, new object[] { reference })!;
 
             if (obj is DefaultFirestoreDocument defaultFirestoreDocument)
             {

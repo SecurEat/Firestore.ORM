@@ -60,7 +60,6 @@ namespace Firestore.ORM
         }
         public SnapshotListener(Query query)
         {
-            Logger.Plus();
             this.Query = query;
             this.m_items = new List<T>();
             this.m_items_safe = new List<T>();

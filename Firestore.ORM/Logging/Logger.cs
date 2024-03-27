@@ -89,10 +89,5 @@ namespace Firestore.ORM.Logging
             }
         }
 
-        static int i = 0;
-        internal static void Plus()
-        {
-            Console.Title = (i++) + "";
-        }
     }
 }
