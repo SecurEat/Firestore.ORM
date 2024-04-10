@@ -132,6 +132,7 @@ namespace Firestore.ORM
 
             return value;
         }
+
         public T FromFirestore<T>(DocumentReference reference, Dictionary<string, object> values) where T : FirestoreDocument
         {
             Type type = typeof(T);
@@ -158,9 +159,11 @@ namespace Firestore.ORM
                     propertyType = underlyingType;
                 }
 
+                var hasDefaultValue = propertyInfo.GetValue(obj) != null;
+
                 if (!values.ContainsKey(key.Name) || values[key.Name] == null)
                 {
-                    if (key.Nullability == FieldNullability.NonNullable)
+                    if (key.Nullability == FieldNullability.NonNullable && !hasDefaultValue)
                     {
                         obj.Incidents.Add(new MissingFieldIncident(obj, propertyInfo, key));
                     }

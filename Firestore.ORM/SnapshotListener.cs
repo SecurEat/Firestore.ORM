@@ -162,7 +162,7 @@ namespace Firestore.ORM
         /// </summary>
         public T? GetById(string id)
         {
-            return Items.FirstOrDefault(x => x.Id == id);
+            return Items.FirstOrDefault(x => x.DocumentId == id);
         }
         /// <summary>
         /// Returns items that do not match the model structure.

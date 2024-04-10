@@ -16,7 +16,8 @@ namespace Firestore.ORM
             Reference = reference;
             Incidents = new List<Incident>();
         }
-        public string Id => Reference.Id;
+
+        public string DocumentId => Reference.Id;
         public string Path => Reference.Path;
         public DocumentReference Reference
         {
