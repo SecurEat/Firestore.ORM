@@ -12,7 +12,7 @@ namespace Firestore.ORM.Extensions
 {
     public static class DocumentExtensions
     {
-        public static async Task<bool> Exists(this Query query) 
+        public static async Task<bool> Exists(this Query query)
         {
             var res = await query.Limit(1).GetSnapshotAsync();
             return res.Count > 0;
@@ -31,14 +31,12 @@ namespace Firestore.ORM.Extensions
         }
         public static async Task<List<T>> GetAsync<T>(this Query query) where T : FirestoreDocument
         {
-            return await FirestoreManager.Instance.Get<T>(query);
+            return await FirestoreManager.Instance.GetAsync<T>(query);
         }
 
         public static List<T> Get<T>(this Query query) where T : FirestoreDocument
         {
-            var task = FirestoreManager.Instance.Get<T>(query);
-            task.Wait();
-            return task.Result;
+            return FirestoreManager.Instance.Get<T>(query);
         }
     }
 }

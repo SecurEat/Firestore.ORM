@@ -92,7 +92,13 @@ namespace Firestore.ORM
             return CollectionDefinitions[type];
         }
 
-        public async Task<List<T>> Get<T>(Query query) where T : FirestoreDocument
+        public List<T> Get<T>(Query query) where T : FirestoreDocument
+        {
+            var task = GetAsync<T>(query);
+            task.Wait();
+            return task.Result;
+        }
+        public async Task<List<T>> GetAsync<T>(Query query) where T : FirestoreDocument
         {
             List<T> result = new List<T>();
             var snapshot = await query.GetSnapshotAsync();
