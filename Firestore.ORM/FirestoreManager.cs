@@ -110,11 +110,20 @@ namespace Firestore.ORM
 
             return result;
         }
-        public async Task<T> Get<T>(DocumentReference reference) where T : FirestoreDocument
+        public async Task<T> GetAsync<T>(DocumentReference reference) where T : FirestoreDocument
         {
             var snapshot = await reference.GetSnapshotAsync();
             return FromFirestore<T>(reference, snapshot.ToDictionary());
         }
+
+        public T Get<T>(DocumentReference reference) where T : FirestoreDocument
+        {
+            var task = reference.GetSnapshotAsync(); ;
+            task.Wait();
+            var snapshot = task.Result;
+            return FromFirestore<T>(reference, snapshot.ToDictionary());
+        }
+
         private IList? ConvertList(List<object> value, Type targetType)
         {
             if (value == null)
