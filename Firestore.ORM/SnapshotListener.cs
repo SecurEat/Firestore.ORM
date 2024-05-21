@@ -58,6 +58,12 @@ namespace Firestore.ORM
             get;
             set;
         }
+
+        private FirestoreChangeListener? InternalListener
+        {
+            get;
+            set;
+        }
         public SnapshotListener(Query query)
         {
             this.Query = query;
@@ -91,7 +97,7 @@ namespace Firestore.ORM
 
             var tcs = new TaskCompletionSource<bool>();
 
-            var listener = Query.Listen((QuerySnapshot snap) =>
+            InternalListener = Query.Listen((QuerySnapshot snap) =>
             {
 
                 var oldItems = m_items.ToArray();
@@ -157,6 +163,13 @@ namespace Firestore.ORM
             await tcs.Task;
         }
 
+        public void Stop()
+        {
+            if (InternalListener != null)
+            {
+                InternalListener.StopAsync().Wait();
+            }
+        }
         /// <summary>
         /// Returns a document by reference
         /// </summary>
