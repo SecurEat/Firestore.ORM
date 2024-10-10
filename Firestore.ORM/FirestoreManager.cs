@@ -210,6 +210,14 @@ namespace Firestore.ORM
                     {
                         value = ((Timestamp)value).ToDateTime();
                     }
+                    else if (propertyType == typeof(float))
+                    {
+                        value = Convert.ChangeType(value, typeof(float));
+                    }
+                    else if (propertyType == typeof(double))
+                    {
+                        value = Convert.ChangeType(value, typeof(double));
+                    }
                     else if (propertyType == typeof(int))
                     {
                         value = Convert.ChangeType(value, typeof(int));
